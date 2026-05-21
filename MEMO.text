@@ -5,6 +5,18 @@ test
 
 testing
 
+<<<<<<< HEAD
 one more
 
 two more
+=======
+{
+  "gitdoc.enabled": true,
+  "gitdoc.autoCommitDelay": 15000,
+  "gitdoc.autoPullDelay": 15000,
+  "gitdoc.autoPush": "onCommit",
+  "gitdoc.commitMessageFormat": "自動保存ゆら {{date}}",
+  "git.suggestSmartCommit": false,
+  "git.autofetch": true
+}
+>>>>>>> 7b1646576ba6bc7ffd1dbce91b8ec641492300e2
