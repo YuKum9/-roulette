@@ -10,7 +10,10 @@ testing
   "gitdoc.autoCommitDelay": 15000,
   "gitdoc.autoPullDelay": 15000,
   "gitdoc.autoPush": "onCommit",
-  "gitdoc.commitMessageFormat": "自動保存ゆら {{date}}",
+  "gitdoc.commitMessageFormat": "せいや {{date}}",
   "git.suggestSmartCommit": false,
   "git.autofetch": true
 }
+
+four more
+
