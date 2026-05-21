@@ -6,6 +6,7 @@ test
 testing
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 one more
 
 <<<<<<< HEAD
@@ -16,3 +17,8 @@ two more
 =======
 one more
 >>>>>>> 8ad410133f57cc997153e2753b21629047661667
+=======
+one more
+
+three more
+>>>>>>> 9dc1aab542593a4356439e0d40753dc9f24184aa
