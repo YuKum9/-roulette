@@ -4,13 +4,3 @@ git pull origin main
 test
 
 testing
-
-{
-  "gitdoc.enabled": true,
-  "gitdoc.autoCommitDelay": 15000,
-  "gitdoc.autoPullDelay": 15000,
-  "gitdoc.autoPush": "onCommit",
-  "gitdoc.commitMessageFormat": "自動保存ゆら {{date}}",
-  "git.suggestSmartCommit": false,
-  "git.autofetch": true
-}
