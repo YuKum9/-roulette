@@ -1,1 +1,2 @@
 ./push.bat ""
+git pull origin main
