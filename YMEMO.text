@@ -4,7 +4,7 @@
   "gitdoc.enabled": true,
   "gitdoc.autoCommitDelay": 20000,
   "gitdoc.autoPullDelay": 20000,
-  "gitdoc.autoPull": "onPush",
+  "gitdoc.autoPull": "afterDelay",
   "gitdoc.autoPush": "onCommit",
   "gitdoc.commitMessageFormat": "自動保存ゆら {{date}}",
   "git.suggestSmartCommit": false,
