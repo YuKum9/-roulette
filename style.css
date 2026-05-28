@@ -63,3 +63,8 @@ h1{
 .spin-btn:hover{
     background: #555;
 }
+
+.spin-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
