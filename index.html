@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webルーレット</title>
-</head>
-<body>
-  <h1>ルーレット</h1>
-  <canvas id="roulette" width="400" height="400"></canvas>
-  <br>
-  <button id="spinBtn">回すdayo</button>
-  <p id="result"></p>
-  
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name=""viewport" content="width=device-width, initial-scale=1.0">
+    <title>ルーレット</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🎯ルーレット</h1>
+      <!-- ルーレット本体 -->
+      <div class="wheel-wrapper">
+        <canvas id="wheel" width="400" height="400"></canvas>
+        <div class="pin">▼</div>
+      </div>
+
+      <!-- 回すときに押すボタン -->
+      <button id="spinBtn" class="spin-btn">回す</button>
+
+      <!-- 結果表示 -->
+      <div id="resultBanner" class="result-banner hidden">
+        <span id="resultText"></span>
+      </div>
+
+      <!-- 項目編集 -->
+      <div class="edit-area">
+        <label>項目を編集</label>
+        <textarea id="itemsInput" rows="8" placeholder="Aさん&#10;Bさん&#10;Cさん&#10;"></textarea>
+        <button id="applyBtn" class="apply-btn">反映する</button>
+      </div>
+
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
