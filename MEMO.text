@@ -1,6 +1,8 @@
 ./push.bat ""
 git pull origin main
 
+；；
+
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 const spinBtn = document.getElementById("spinBtn");
