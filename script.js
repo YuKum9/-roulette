@@ -1,0 +1,130 @@
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const spinBtn = document.getElementById("spinBtn");
+const applyBtn = document.getElementById("applyBtn");
+const itemsInput = document.getElementById("itemsInput");
+const resultBanner = document.getElementById("resultBanner");
+const resultText = document.getElementById("resultText");
+const closeBtn = document.getElementById("closeBtn");
+
+// 初期項目
+let items = ["Aさん", "Bさん", "Cさん", "Dさん", "Eさん"];
+const colors = ["#4A90D9", "#E86F6F", "#6FCF97", "#F2C94C", "#BB6BD9", "#F2994A", "#56CCF2", "#EB5757"];
+
+let currentAngle = 0;
+let isSpinning = false;
+
+// ルーレット描画
+function drawWheel(angle) {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const r = cx - 10;
+  const slice = (2 * Math.PI) / items.length;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  items.forEach((item, i) => {
+    const start = angle + i * slice;
+    const end = start + slice;
+
+    // 扇形
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // テキスト
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(start + slice / 2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#fff";
+    ctx.font = `bold ${Math.min(16, 120 / items.length + 8)}px Arial`;
+    ctx.shadowColor = "rgba(0,0,0,0.3)";
+    ctx.shadowBlur = 3;
+    ctx.fillText(item.length > 8 ? item.slice(0, 8) + "…" : item, r - 12, 6);
+    ctx.restore();
+  });
+
+  // 中心の円
+  ctx.beginPath();
+  ctx.arc(cx, cy, 14, 0, 2 * Math.PI);
+  ctx.fillStyle = "#fff";
+  ctx.shadowColor = "rgba(0,0,0,0.2)";
+  ctx.shadowBlur = 6;
+  ctx.fill();
+}
+
+// 回転
+spinBtn.addEventListener("click", () => {
+  if (isSpinning) return;
+  isSpinning = true;
+  spinBtn.disabled = true;
+  resultBanner.classList.add("hidden");
+
+  const totalRotation = (Math.random() * 360 + 1440) * (Math.PI / 180);
+  const duration = 4000;
+  const startTime = performance.now();
+  const startAngle = currentAngle;
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const angle = startAngle + totalRotation * ease;
+
+    drawWheel(angle);
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      currentAngle = angle;
+      isSpinning = false;
+      spinBtn.disabled = false;
+
+      // 結果計算
+      const slice = (2 * Math.PI) / items.length;
+      const normalized = (((-(currentAngle + Math.PI / 2) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI));
+      const index = Math.floor(normalized / slice) % items.length;
+
+      resultText.textContent = `🎉 ${items[index]}`;
+      resultBanner.classList.remove("hidden");
+    }
+  }
+
+  requestAnimationFrame(animate);
+});
+
+// 結果バナーを閉じる
+closeBtn.addEventListener("click", () => {
+  resultBanner.classList.add("hidden");
+});
+
+// 項目を反映
+applyBtn.addEventListener("click", () => {
+  const newItems = itemsInput.value
+    .split("\n")
+    .map(s => s.trim())
+    .filter(s => s !== "");
+
+  if (newItems.length < 2) {
+    alert("項目は2つ以上入力してください");
+    return;
+  }
+
+  items = newItems;
+  currentAngle = 0;
+  drawWheel(currentAngle);
+  resultBanner.classList.add("hidden");
+});
+
+// テキストエリアの初期値
+itemsInput.value = items.join("\n");
+
+// 最初の描画
+drawWheel(currentAngle);
